@@ -7,7 +7,7 @@ router.get('/Add', (req, res) => {
 
     let result = num1 + num2;
 
-    res.status(200);
+    res.status(200)
     res.send({ res: result })
 });
 
