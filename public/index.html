@@ -1,0 +1,82 @@
+<!-- Create an index.html file in the public folder to serve as a front end for my calculator (Q3) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server-side calculator</title>
+</head>
+<body>
+    <h1>Server side calculator</h1>
+    <p>Enter your numbers below!</p>
+    <!-- Create the input fields for user to input the numbers  -->
+    <div class="inputfields">
+        <label class="label" for="num1"></label>
+        <input type="number" id="num1" placeholder="First number...">
+        <!-- Make sure the inputs have an ID so i can access them using the DOM -->
+        <label class="label" for="num2"></label>
+        <input type="number" id="num2" placeholder="Second number...">
+    </div>
+
+    <!-- Create the buttons that will execute the mathematical function on the inputted numbers -->
+    <!-- Make sure each button has an ID so can be accessed using DOM -->
+    <div class="button1">
+        <!-- When add is clicked, addNum function is called  -->
+        <button id="add" onclick="addNum()">ADD</button>
+        <!-- When subtract is clicked, subNum function is called  -->
+        <button id="sub" onclick="subNum()">SUBTRACT</button>
+        <!-- When multiply is clicked, multNum function is called  -->
+        <button id="mul" onclick="multNum()">MULTIPLY</button>
+        <!-- When divide is clicked, divNum function is called  -->
+        <button id="div" onclick="divNum()">DIVIDE</button>
+    </div>
+
+<!-- Create an element for the result, using and ID to access using DOM -->
+    <div>
+        <h1>Your result is:</h1>
+        <p id="result"></p>
+    </div>
+<!-- Create a reset button with an ID to access  -->
+        <div class="button2">
+            <button id="reset">Reset</button>
+        </div>
+
+    <script>
+        // in the script tag, create the functions for the mathematical equations: 
+        function addNum() {
+            let num1 = document.getElementById("num1").value; //Select num1 from the dom and assign its value to the variable num1
+            let num2 = document.getElementById("num2").value; //Select num2 from the dom and assign its value to variable num2
+            fetch(`./Calculator/Add?num1=${num1}&num2=${num2}`) // use the fetch function to make an HTTP get reqest to my server. it constructs the required URL 
+                .then(response => response.json()) // return the response in json format
+                .then(data => document.getElementById("result").innerHTML = data.res) //select result from the dom and assign the res property of the json data as the innerHTML 
+        }
+        function subNum() {
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            fetch(`./Calculator/Subtract?num1=${num1}&num2=${num2}`) // change the route to Subtract
+                .then(response => response.json())
+                .then(data => document.getElementById("result").innerHTML = data.res)
+        }
+        function multNum() {
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            fetch(`./Calculator/Multiply?num1=${num1}&num2=${num2}`) // Change the route to Multiply
+                .then(response => response.json())
+                .then(data => document.getElementById("result").innerHTML = data.res)
+        }
+        function divNum() {
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            fetch(`./Calculator/Divide?num1=${num1}&num2=${num2}`) // change the route to Divide 
+                .then(response => response.json())
+                .then(data => document.getElementById("result").innerHTML = data.res)
+        }
+        // Create a function to reset all values to default
+        document.getElementById('reset').addEventListener("click", () => { // add an event listener, so when the button with id=reset it clicked, this function is called 
+                    document.getElementById("num1").value = ""; // reset num1 in DOM
+                    document.getElementById("num2").value = ""; // reset num2 in DOM
+                    document.getElementById("result").innerText = "" // reset result in DOM
+                });
+    </script>
+</body>
+</html>
