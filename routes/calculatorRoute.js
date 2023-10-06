@@ -1,47 +1,26 @@
 // Install express using "require"
 const express = require('express');
+// import the calculator controller and asssign to variable
+const calculatorController = require('../controllers/calculatorController');
 // Create the router using express.Router() method from express 
 const router = express.Router();
 
+
 // create the addition router
 router.get('/Add', (req, res) => { //You will need to include /Add in your query string 
-    let num1 = parseInt(req.query.num1); // parseInt so the numbers are parsed as number not strings 
-    let num2 = parseInt(req.query.num2);
-
-    let result = num1 + num2; // because its an addition route 
-
-    res.status(200); // make sure the status is OK
-    res.send({ res: result }); // return the result in json format 
+    calculatorController.addNumbers(req, res)
 });
 
 router.get('/Multiply', (req, res) => {
-    let num1 = parseInt(req.query.num1);
-    let num2 = parseInt(req.query.num2);
-
-    let result = num1 * num2;
-
-    res.status(200);
-    res.json({ res: result });
+    calculatorController.multiplyNumbers(req, res)
 });
 
 router.get('/Divide', (req, res) => {
-    let num1 = parseInt(req.query.num1);
-    let num2 = parseInt(req.query.num2);
-
-    let result = num1 / num2;
-
-    res.status(200);
-    res.json({ res: result });
+    calculatorController.divideNumbers(req, res)
 });
 
 router.get('/Subtract', (req, res) => {
-    let num1 = parseInt(req.query.num1);
-    let num2 = parseInt(req.query.num2);
-
-    let result = num1 - num2;
-
-    res.status(200);
-    res.json({ res: result });
+    calculatorController.subtractNumbers(req, res)
 });
 
 // export your router to be used in the index.js file

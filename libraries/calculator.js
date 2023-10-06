@@ -1,0 +1,16 @@
+class CalculatorLibrary {
+    constructor() {
+        this.id = Date.now()
+    }
+    #log = (value) => {
+        console.log(`[Calculator :${this.id}]:${value}`)
+    }
+    add(num1, num2) {
+        let num1 = parseInt(num1)
+        let num2 = parseInt(num2)
+        const value = num1 + num2
+        this.#log(value)
+        return value;
+    }
+}
+module.exports = CalculatorLibrary;
