@@ -15,7 +15,7 @@ const port = 3000;
 // map the route you want your calculator to use /Add, /Multiply etc will come after the /Calculator
 serverApp.use('/Calculator', calculatorRoutes)
 // map to the static html page to display the calculator interface 
-serverApp.use('/', express.static('Public'))
+serverApp.use('/', express.static('public'))
 // map the swagger documents to /api-docs 
 serverApp.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
